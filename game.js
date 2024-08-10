@@ -106,8 +106,22 @@ $(document).keydown(function() {
 
 });
 
+$(".startingButton").on("click tap", function(event) {
+    event.preventDefault(); // Zabrání výchozímu chování události
+
+    if (!gameInitialized) {
+
+        gameInitialized = true;
+        nextColor();
+        $(".btn").attr("disabled", false);
+
+    } else {
+        alert("Hra je již spuštěna");
+    }
+});
+
 //Logika hry
-$(".btn").click(function() {
+$(".btn").on("click tap", function() {
 
     var clickedButton = this.id;
 
