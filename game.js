@@ -73,7 +73,7 @@ function checkAnswer(answer){
 }
 
 function gameOver(){
-    $("h1").text("Game over! Refresh the page");
+    $("h1").html("Game over at level " + level + "! <br> Press any Key to Restart game");
     $(".btn").attr("disabled", true);
     
     var gameOverSound = new Audio("./sounds/wrong.mp3")
@@ -84,6 +84,13 @@ function gameOver(){
     setTimeout(() => {
         $("body").removeClass("game-over");
     }, 400);
+
+    gameInitialized = false;
+    gamePattern = [];
+    userClickedPattern = [];
+    level = 0;
+    clickCounter = 0;
+    $(".startingButton").text("Or RE-START here");
 }
 
 
@@ -101,7 +108,7 @@ $(document).keydown(function() {
         $(".btn").attr("disabled", false);
 
     } else {
-        alert("Hra je již spuštěna");
+        alert("Game is already running");
     }
 
 });
@@ -116,7 +123,7 @@ $(".startingButton").on("click tap", function(event) {
         $(".btn").attr("disabled", false);
 
     } else {
-        alert("Hra je již spuštěna");
+        alert("Game is already running");
     }
 });
 
@@ -130,10 +137,6 @@ $(".btn").on("click tap", function() {
 
     userClickedPattern.push(clickedButton);
     clickCounter+=1;
-    
-    console.log(userClickedPattern);
-    console.log(gamePattern);
-    console.log(clickCounter);
 
     if (userClickedPattern[clickCounter - 1] != gamePattern[clickCounter - 1]) {
 
